@@ -1,6 +1,12 @@
 const searchBar = document.getElementById('search-bar')
 searchBar.oninput = () => {
-  if (searchBar.value != '') searchBooks(searchBar.value)
+  if (searchBar.value != '') {
+    searchResultsContainer.classList.add('active')
+    searchBooks(searchBar.value)
+  } else {
+    clearContainer(searchResultsContainer)
+    searchResultsContainer.classList.remove('active')
+  }
 }
 
 function searchBooks(search) {
@@ -11,6 +17,7 @@ function searchBooks(search) {
     })
     .then(function (response) {
       console.log(response.items)
+      displaySearchResults(response.items)
     })
     .catch(function (err) {
       console.log(err)
