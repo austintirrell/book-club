@@ -29,6 +29,7 @@ header {
 
 .header-row-two {
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -42,6 +43,37 @@ header {
     width: 75%;
     border: 2px solid #CCCCCC;
     border-radius: 25px;
+    z-index: 1;
+}
+
+#search-results-container {
+    width: 75%;
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    top: 3rem;
+    background: #FFFFFF;
+    padding: 1rem 2rem 1rem 2rem;
+    border: 2px solid #CCCCCC;
+    border-radius: 0 0 25px 25px;
+}
+
+#search-results-container.active {
+    display: flex;
+}
+
+.search-item-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 3rem;
+    margin: .25rem 0;
+    border-bottom: 2px solid #CCCCCC;
+    padding: .5rem .5rem 0 .5rem;
+    border-radius: 0 25px 0 0;
+}
+
+.search-item-container:hover {
+    background: #EEEEEE;
 }
 
 .container-heading {
