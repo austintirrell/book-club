@@ -70,6 +70,7 @@ header {
     border-bottom: 2px solid #CCCCCC;
     padding: .5rem .5rem 0 .5rem;
     border-radius: 0 25px 0 0;
+    cursor: pointer;
 }
 
 .search-item-container:hover {
@@ -115,10 +116,10 @@ header {
 .arrow-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
     margin: auto;
     margin-right: 1rem;
+    cursor: pointer;
 }
 
 .book-card-arrow {
@@ -137,4 +138,16 @@ header {
 .arrow-down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+.book-card-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    width: 1rem;
+    height: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
 }

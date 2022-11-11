@@ -35,7 +35,7 @@ function resetSearch() {
 
 function createTextElement(type, text, className, parent) {
   let p = document.createElement(type)
-  p.classList.add(className)
+  if (className) p.classList.add(className)
   p.innerText = text
   parent.appendChild(p)
 }
@@ -67,26 +67,40 @@ function displayLibrary() {
     bookInfoContainer.appendChild(bookTextContainer)
     bookCard.appendChild(bookInfoContainer)
 
-    let arrowContainer = document.createElement('div')
-    arrowContainer.classList.add('arrow-container')
+    let buttonContainer = document.createElement('div')
+    buttonContainer.classList.add('arrow-container')
     let upArrow = document.createElement('i')
     upArrow.classList.add('book-card-arrow')
     upArrow.classList.add('arrow-up')
-    upArrow.addEventListener('click', () => {
-      console.log('up')
-      book.changeStatusUp()
+    upArrow.onclick = () => {
+      if (book.status == 'currently reading') book.changeStatus('previously read')
+      else if (book.status == 'previously read') book.changeStatus('to be read')
+      else if (book.status == 'to be read') book.changeStatus('currently reading')
       displayLibrary()
-    })
-    arrowContainer.appendChild(upArrow)
+    }
+    buttonContainer.appendChild(upArrow)
+
+    let deleteButton = document.createElement('div')
+    deleteButton.classList.add('book-card-delete')
+    createTextElement('p', 'ⓧ', null, deleteButton)
+    deleteButton.onclick = () => {
+      let index = library.findIndex((obj) => obj.id == book.id)
+      library.splice(index)
+      displayLibrary()
+    }
+    buttonContainer.appendChild(deleteButton)
+
     let downArrow = document.createElement('i')
     downArrow.classList.add('book-card-arrow')
     downArrow.classList.add('arrow-down')
-    downArrow.addEventListener('click', () => {
-      book.changeStatusDown()
+    downArrow.onclick = () => {
+      if (book.status == 'currently reading') book.changeStatus('to be read')
+      else if (book.status == 'to be read') book.changeStatus('previously read')
+      else if (book.status == 'previously read') book.changeStatus('currently reading')
       displayLibrary()
-    })
-    arrowContainer.appendChild(downArrow)
-    bookCard.appendChild(arrowContainer)
+    }
+    buttonContainer.appendChild(downArrow)
+    bookCard.appendChild(buttonContainer)
 
     if (book.status == 'currently reading') currentlyReadingContainer.appendChild(bookCard)
     else if (book.status == 'to be read') toBeReadContainer.appendChild(bookCard)
