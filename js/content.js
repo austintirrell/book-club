@@ -15,7 +15,7 @@ function clearContainer(parent) {
 }
 
 function createSearchResult(book) {
-  book = new Book(book.id, book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail, 'to be read')
+  book = new Book(book.id, book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail, 'previously read')
   let searchItemContainer = document.createElement('div')
   searchItemContainer.classList.add('search-item-container')
   searchItemContainer.onclick = () => {
@@ -72,12 +72,20 @@ function displayLibrary() {
     let upArrow = document.createElement('i')
     upArrow.classList.add('book-card-arrow')
     upArrow.classList.add('arrow-up')
+    upArrow.addEventListener('click', () => {
+      console.log('up')
+      book.changeStatusUp()
+      displayLibrary()
+    })
     arrowContainer.appendChild(upArrow)
     let downArrow = document.createElement('i')
     downArrow.classList.add('book-card-arrow')
     downArrow.classList.add('arrow-down')
+    downArrow.addEventListener('click', () => {
+      book.changeStatusDown()
+      displayLibrary()
+    })
     arrowContainer.appendChild(downArrow)
-
     bookCard.appendChild(arrowContainer)
 
     if (book.status == 'currently reading') currentlyReadingContainer.appendChild(bookCard)
