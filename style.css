@@ -81,3 +81,60 @@ header {
     margin: 1rem;
     border-bottom: 2px solid #CCCCCC;
 }
+
+.book-card {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+    background: #EEEEEE;
+    margin: 0 1rem 1rem 1rem;
+}
+
+.book-card-info {
+    display: flex;
+    align-items: center;
+}
+
+.book-card-thumbnail {
+    margin-left: .5rem;
+    width: 3.5rem;
+    height: 5rem;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.book-text-container {
+    margin: 0 0 0 .5rem;
+}
+
+.book-card-authors {
+    font-size: .75rem;
+}
+
+.arrow-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+    margin-right: 1rem;
+}
+
+.book-card-arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin: 1rem 0;
+}
+
+.arrow-up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.arrow-down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
