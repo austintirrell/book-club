@@ -84,9 +84,7 @@ function displayLibrary() {
     deleteButton.classList.add('book-card-delete')
     createTextElement('p', 'ⓧ', null, deleteButton)
     deleteButton.onclick = () => {
-      let index = library.findIndex((obj) => obj.id == book.id)
-      library.splice(index)
-      displayLibrary()
+      removeBookFromLibrary(book)
     }
     buttonContainer.appendChild(deleteButton)
 
