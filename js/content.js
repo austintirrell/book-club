@@ -15,7 +15,7 @@ function clearContainer(parent) {
 }
 
 function createSearchResult(book) {
-  book = new Book(book.id, book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail, 'previously read')
+  book = new Book(book.id, book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail, 'to be read')
   let searchItemContainer = document.createElement('div')
   searchItemContainer.classList.add('search-item-container')
   searchItemContainer.onclick = () => {
