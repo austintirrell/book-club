@@ -19,8 +19,10 @@ function createSearchResult(book) {
   let searchItemContainer = document.createElement('div')
   searchItemContainer.classList.add('search-item-container')
   searchItemContainer.onclick = () => {
-    addBookToLibrary(book)
-    resetSearch()
+    if (library.findIndex((obj) => obj.id == book.id) == -1) {
+      addBookToLibrary(book)
+      resetSearch()
+    } else alert('That book has already been added...')
   }
   createTextElement('p', book.title, 'search-item-title', searchItemContainer)
   createTextElement('p', book.authors.join(', '), 'search-item-author', searchItemContainer)
