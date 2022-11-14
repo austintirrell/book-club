@@ -15,7 +15,7 @@ function clearContainer(parent) {
 }
 
 function createSearchResult(book) {
-  book = new Book(book.id, book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail, 'to be read')
+  book = new Book(book.id, book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail, 'to be read', [])
   let searchItemContainer = document.createElement('div')
   searchItemContainer.classList.add('search-item-container')
   searchItemContainer.onclick = () => {
@@ -25,7 +25,8 @@ function createSearchResult(book) {
     } else alert('That book has already been added...')
   }
   createTextElement('p', book.title, 'search-item-title', searchItemContainer)
-  createTextElement('p', book.authors.join(', '), 'search-item-author', searchItemContainer)
+  if (Array.isArray(book.authors) && book.authors.length > 0) book.authors = book.authors.join(', ')
+  createTextElement('p', book.authors, 'search-item-author', searchItemContainer)
   searchResultsContainer.appendChild(searchItemContainer)
 }
 
@@ -62,7 +63,7 @@ function displayLibrary() {
     bookTextContainer = document.createElement('div')
     bookTextContainer.classList.add('book-text-container')
     createTextElement('p', book.title, 'book-card-title', bookTextContainer)
-    createTextElement('p', book.authors.join(', '), 'book-card-authors', bookTextContainer)
+    createTextElement('p', book.authors, 'book-card-authors', bookTextContainer)
     bookCard.appendChild(bookTextContainer)
 
     bookInfoContainer.appendChild(thumbnail)
@@ -72,8 +73,7 @@ function displayLibrary() {
     let buttonContainer = document.createElement('div')
     buttonContainer.classList.add('arrow-container')
     let upArrow = document.createElement('i')
-    upArrow.classList.add('book-card-arrow')
-    upArrow.classList.add('arrow-up')
+    upArrow.classList.add('fa-solid', 'fa-angle-up')
     upArrow.onclick = () => {
       if (book.status == 'currently reading') book.changeStatus('previously read')
       else if (book.status == 'previously read') book.changeStatus('to be read')
@@ -82,18 +82,17 @@ function displayLibrary() {
     }
     buttonContainer.appendChild(upArrow)
 
-    let deleteButton = document.createElement('div')
-    deleteButton.classList.add('book-card-delete')
-    createTextElement('p', 'ⓧ', null, deleteButton)
+    let deleteButton = document.createElement('i')
+    deleteButton.classList.add('fa-solid', 'fa-trash-can')
     deleteButton.onclick = () => {
       removeBookFromLibrary(book)
     }
     buttonContainer.appendChild(deleteButton)
 
     let downArrow = document.createElement('i')
-    downArrow.classList.add('book-card-arrow')
-    downArrow.classList.add('arrow-down')
+    downArrow.classList.add('fa-solid', 'fa-angle-down')
     downArrow.onclick = () => {
+      console.log('down arrow')
       if (book.status == 'currently reading') book.changeStatus('to be read')
       else if (book.status == 'to be read') book.changeStatus('previously read')
       else if (book.status == 'previously read') book.changeStatus('currently reading')

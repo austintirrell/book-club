@@ -1,4 +1,4 @@
-let library
+let library = []
 
 function Book(id, title, authors, thumbnail, status) {
   this.id = id
@@ -34,7 +34,7 @@ function restoreLocalData() {
     library = []
     let books = JSON.parse(localStorage.getItem('books'))
     books.forEach(book => {
-      library[library.length] = new Book(book.id, book.title, book.authors, book.thumbnail, book.status)
+      library[library.length] = new Book(book.id, book.title, book.authors, book.thumbnail, book.status, book.notes)
     })
     displayLibrary()
   } else library = []
