@@ -1,4 +1,7 @@
 let library = []
+library[0] = new Book("5wBQEp6ruIAC", "The Pragmatic Programmer", "Andrew Hunt, David Thomas", "http://books.google.com/books/content?id=5wBQEp6ruIAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api", "previously read")
+library[0].notes[0] = new Notes('Chapter 1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+library[0].notes[1] = new Notes('Chapter 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
 
 function Book(id, title, authors, thumbnail, status) {
   this.id = id
@@ -6,10 +9,16 @@ function Book(id, title, authors, thumbnail, status) {
   this.authors = authors
   this.thumbnail = thumbnail
   this.status = status
+  this.notes = []
   this.changeStatus = (str) => {
     this.status = str
     saveDataLocally()
   }
+}
+
+function Notes(label, notes) {
+  this.label = label
+  this.notes = notes
 }
 
 function addBookToLibrary(book) {
@@ -41,5 +50,6 @@ function restoreLocalData() {
 }
 
 window.onload = () => {
-  restoreLocalData()
+  //restoreLocalData()
+  displayLibrary()
 }

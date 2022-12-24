@@ -3,6 +3,14 @@ const currentlyReadingContainer = document.getElementById('currently-reading-con
 const toBeReadContainer = document.getElementById('to-be-read-container')
 const previouslyReadContainer = document.getElementById('previously-read-container')
 
+function createElement(type, className, text, parent) {
+  let element = document.createElement(type)
+  if (className) element.classList.add(className)
+  if (text) element.innerHTML = text
+  if (parent) parent.appendChild(element)
+  return element
+}
+
 function displaySearchResults(books) {
   clearContainer(searchResultsContainer)
   books.forEach(book => {
@@ -15,18 +23,16 @@ function clearContainer(parent) {
 }
 
 function createSearchResult(book) {
-  book = new Book(book.id, book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail, 'to be read', [])
-  let searchItemContainer = document.createElement('div')
-  searchItemContainer.classList.add('search-item-container')
+  book = new Book(book.id, book.volumeInfo.title, book.volumeInfo.authors.join(', '), book.volumeInfo.imageLinks.thumbnail, 'to be read')
+  let searchItemContainer = createElement('div', 'search-item-container')
   searchItemContainer.onclick = () => {
     if (library.findIndex((obj) => obj.id == book.id) == -1) {
       addBookToLibrary(book)
       resetSearch()
     } else alert('That book has already been added...')
   }
-  createTextElement('p', book.title, 'search-item-title', searchItemContainer)
-  if (Array.isArray(book.authors) && book.authors.length > 0) book.authors = book.authors.join(', ')
-  createTextElement('p', book.authors, 'search-item-author', searchItemContainer)
+  createElement('p', 'search-item-title', book.title, searchItemContainer)
+  createElement('p', 'search-item-author', book.authors, searchItemContainer)
   searchResultsContainer.appendChild(searchItemContainer)
 }
 
@@ -36,71 +42,67 @@ function resetSearch() {
   searchBar.value = ''
 }
 
-function createTextElement(type, text, className, parent) {
-  let p = document.createElement(type)
-  if (className) p.classList.add(className)
-  p.innerText = text
-  parent.appendChild(p)
-}
-
 function displayLibrary() {
   clearContainer(currentlyReadingContainer)
   clearContainer(toBeReadContainer)
   clearContainer(previouslyReadContainer)
-  library.forEach(book => {
-    let bookCard = document.createElement('div')
-    bookCard.classList.add('book-card')
+
+  library.forEach(book => { 
+    let bookCard = createElement('div', 'book-card')
     bookCard.setAttribute('id', book.id)
-
-    let bookInfoContainer = document.createElement('div')
-    bookInfoContainer.classList.add('book-card-info')
-
-    let thumbnail = document.createElement('div')
-    thumbnail.classList.add('book-card-thumbnail')
+    let bookCardRowOne = createElement('div', 'book-card-row-one')
+    let bookInfoContainer = createElement('div', 'book-card-info')
+    let thumbnail = createElement('div', 'book-card-thumbnail')
     thumbnail.style.backgroundImage = 'url(' + book.thumbnail + ')'
-    bookCard.appendChild(thumbnail)
-
-    bookTextContainer = document.createElement('div')
-    bookTextContainer.classList.add('book-text-container')
-    createTextElement('p', book.title, 'book-card-title', bookTextContainer)
-    createTextElement('p', book.authors, 'book-card-authors', bookTextContainer)
-    bookCard.appendChild(bookTextContainer)
-
+    bookCardRowOne.appendChild(thumbnail)
+    bookTextContainer = createElement('div', 'book-text-container')
+    createElement('p', 'book-card-title', book.title, bookTextContainer)
+    createElement('p', 'book-card-authors', book.authors, bookTextContainer)
+    bookCardRowOne.appendChild(bookTextContainer)
     bookInfoContainer.appendChild(thumbnail)
     bookInfoContainer.appendChild(bookTextContainer)
-    bookCard.appendChild(bookInfoContainer)
-
-    let buttonContainer = document.createElement('div')
-    buttonContainer.classList.add('arrow-container')
-    let upArrow = document.createElement('i')
-    upArrow.classList.add('fa-solid', 'fa-angle-up')
-    upArrow.onclick = () => {
+    bookCardRowOne.appendChild(bookInfoContainer)
+    let buttonContainer = createElement('div', 'button-container')
+    let moveUpButton = createElement('button', 'move-button', '<i class="fa-solid fa-angle-up"></i>')
+    moveUpButton.onclick = () => {
       if (book.status == 'currently reading') book.changeStatus('previously read')
       else if (book.status == 'previously read') book.changeStatus('to be read')
       else if (book.status == 'to be read') book.changeStatus('currently reading')
       displayLibrary()
     }
-    buttonContainer.appendChild(upArrow)
-
-    let deleteButton = document.createElement('i')
-    deleteButton.classList.add('fa-solid', 'fa-trash-can')
-    deleteButton.onclick = () => {
-      removeBookFromLibrary(book)
-    }
+    buttonContainer.appendChild(moveUpButton)
+    let deleteButton = createElement('button', 'delete-button', '<i class="fa-solid fa-trash-can"></i>')
+    deleteButton.onclick = () => removeBookFromLibrary(book)
     buttonContainer.appendChild(deleteButton)
-
-    let downArrow = document.createElement('i')
-    downArrow.classList.add('fa-solid', 'fa-angle-down')
-    downArrow.onclick = () => {
-      console.log('down arrow')
+    let moveDownButton = createElement('button', 'move-button', '<i class="fa-solid fa-angle-down"></i>')
+    moveDownButton.onclick = () => {
       if (book.status == 'currently reading') book.changeStatus('to be read')
       else if (book.status == 'to be read') book.changeStatus('previously read')
       else if (book.status == 'previously read') book.changeStatus('currently reading')
       displayLibrary()
     }
-    buttonContainer.appendChild(downArrow)
-    bookCard.appendChild(buttonContainer)
+    buttonContainer.appendChild(moveDownButton)
+    bookCardRowOne.appendChild(buttonContainer)
 
+    let bookCardRowTwo = createElement('div', 'book-card-row-two', '<i class="fa-solid fa-caret-down"></i>')
+    let notesContainer = createElement('div', 'notes-container')
+    for (let i=0; i<book.notes.length; i++) {
+      let notesCard = createElement('div', 'notes-card')
+      let label = createElement('div', 'notes-card-label-container')
+      let labelButton = createElement('button', 'notes-card-label', book.notes[i].label + '<i class="fa-solid fa-caret-down"></i>', label)
+      labelButton.onclick = () => {
+        console.log('hello')
+      }
+      notesCard.appendChild(label)
+      notesContainer.appendChild(notesCard)
+    }
+    bookCardRowTwo.onclick = () => {
+      notesContainer.classList.toggle('active')
+      bookCardRowTwo.classList.toggle('active')
+    }
+    bookCard.appendChild(bookCardRowOne)
+    bookCard.appendChild(notesContainer)
+    bookCard.appendChild(bookCardRowTwo)
     if (book.status == 'currently reading') currentlyReadingContainer.appendChild(bookCard)
     else if (book.status == 'to be read') toBeReadContainer.appendChild(bookCard)
     else if (book.status == 'previously read') previouslyReadContainer.appendChild(bookCard)

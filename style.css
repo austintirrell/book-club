@@ -77,10 +77,32 @@ header {
 
 .book-card {
     display: flex;
-    justify-content: space-between;
-    padding: .5rem;
-    background: #EEEEEE;
+    flex-direction: column;
     margin: 0 1rem 1rem 1rem;
+    background: #EEEEEE;
+}
+
+.book-card-row-one {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid #CCCCCC;
+}
+
+.book-card-row-two {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:.75rem;
+    background: #CCCCCC;
+    cursor: pointer;
+}
+
+.book-card-row-two:hover {
+    background: #BBBBBB;
+}
+
+.book-card-row-two.active {
+    transform: rotate(180deg);
 }
 
 .book-card-info {
@@ -89,11 +111,10 @@ header {
 }
 
 .book-card-thumbnail {
-    margin-left: .5rem;
     width: 3.5rem;
     height: 5rem;
     background-position: center;
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
@@ -105,23 +126,54 @@ header {
     font-size: .75rem;
 }
 
-.arrow-container {
+.button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    cursor: pointer;
     margin: 0 1rem;
 }
 
-.book-card-delete {
-    display: flex;
+.button-container button {
+    cursor: pointer;
+}
+
+.book-card-row-two .fa-caret-down {
+    color: #EEEEEE;
+}
+
+.notes-container {
+    display: none;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #000000;
-    width: 1rem;
-    height: 1rem;
-    font-weight: 700;
-    border-radius: 50px;
+    background: #DEDEDE;
+}
+
+.notes-card {
+    display: flex;
+    align-items: center;
+}
+
+.notes-container.active {
+    display: flex;
+}
+
+.notes-card-label-container {
+    display: flex;
+    align-items: center;
     cursor: pointer;
+}
+
+.notes-card-label {
+    width: 100%;
+    background: none;
+    margin: .25rem;
+}
+
+.notes-label-dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: .75rem;
 }
