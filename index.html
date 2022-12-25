@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Book Club</title>
-    <meta name="description" content="Book library and note taking">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <script src="./js/library/library.js" async defer></script>
-    <script src="./js/library/book.js" async defer></script>
-    <script src="./js/search/google.js" async defer></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Book Club</title>
+  <meta name="description" content="Book library and note taking">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://kit.fontawesome.com/1cbe88ec8f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <div id="search-container">
+      <i class="fa-solid fa-book"></i>
+      <input type="text" id="search-bar">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+    <div id="results-container"></div>
+  </header>
+
+  <main>
+    <h2 class="status-heading">Currently Reading</h2>
+    <div class="status-container" id="currently-reading-container"></div>
+    <h2 class="status-heading">Up Next</h2>
+    <div class="status-container" id="up-next-container"></div>
+    <h2 class="status-heading">Previously Read</h2>
+    <div class="status-container" id="previously-read-container"></div>
+  </main>
+
+  <footer>
+    <a href="https://github.com/austintirrell" target="_blank">
+      <div id="github-icon"></div>
+    </a>
+  </footer>
+
+  <script src="./js/library/library.js" async defer></script>
+  <script src="./js/library/book.js" async defer></script>
+  <script src="./js/search/google.js" async defer></script>
+</body>
+
 </html>
