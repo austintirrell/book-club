@@ -63,3 +63,19 @@ main {
   border-bottom: 2px solid #CCCCCC;
   margin: 0 .5rem;
 }
+
+/* FOOTER */
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
+.github-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 2px solid #EEEEEE;
+  border-radius: 50%;
+  background: #EEE url("./img/githubIcon.png") no-repeat;
+  background-size: 100%;
+  margin: .5rem;
+}
