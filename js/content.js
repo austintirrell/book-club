@@ -53,9 +53,9 @@ let displayLibrary = () => {
     else if (book.readStatus == 'previously read') bookContainer = previouslyReadContainer
 
     let bookCard = createElement('div', 'book-card', bookContainer)
-    let bookTextContainer = createElement('div', 'book-card-text-container', bookCard)
     let bookImage = createElement('img', 'book-card-image', bookCard)
-    bookImage.style.backgroundImage = 'url(' + book.image + ')'
+    let bookTextContainer = createElement('div', 'book-card-text-container', bookCard)
+    bookImage.style.backgroundImage = `url(${book.image})`
     createElement('p', 'book-card-title', bookTextContainer, book.title)
     createElement('p', 'book-card-author', bookTextContainer, book.author)
   })
