@@ -8,12 +8,12 @@ class Library {
 }
 
 class Book {
-  constructor(id, title, author, readStatus, preview) {
+  constructor(id, title, author, readStatus, image) {
     this.id = id
     this.title = title
     this.author = author
     this.readStatus = readStatus
-    this.preview = preview
+    this.image = image
   }
   setReadStatus(status) {
     this.readStatus = status

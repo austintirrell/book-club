@@ -75,7 +75,15 @@ header {
   border-bottom: 2px solid #CCCCCC;
 }
 
-.result-card-preview {
+.result-card:hover {
+  background: #DDDDDD;
+}
+
+.result-card:active {
+  background: #CCCCCC;
+}
+
+.result-card-image {
   width: 3rem;
   height: 5rem;
 }
