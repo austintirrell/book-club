@@ -1,6 +1,13 @@
 const resultsContainer = document.getElementById('results-container')
 const searchBar = document.getElementById('search-bar')
-searchBar.oninput = () => searchBooks(searchBar.value)
+searchBar.oninput = () => {
+  if (searchBar.value == '') {
+    resultsContainer.classList.remove('active')
+  } else {
+    resultsContainer.classList.add('active')
+    searchBooks(searchBar.value)
+  }
+}
 
 let createElement = (type, className, parent, innerText) => {
   let element = document.createElement(type)
@@ -23,6 +30,8 @@ let displayResults = (results) => {
     let resultCard = createElement('div', 'result-card', resultsContainer)
     createElement('p', 'result-card-title', resultCard, book.title)
     createElement('p', 'result-card-author', resultCard, book.author)
-    resultCard.onclick = () => library.addBook(book)
+    resultCard.onclick = () => {
+      library.addBook(book)
+    }
   })
 }

@@ -52,7 +52,7 @@ header {
 
 /* SEARCH RESULTS */
 #results-container {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: fixed;
   top: 2.45rem;
@@ -60,6 +60,10 @@ header {
   right: 0;
   bottom: 0;
   background: #EEEEEE;
+}
+
+#results-container.active {
+  display: flex;
 }
 
 .result-card {
