@@ -68,7 +68,7 @@ header {
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: 1px solid #CCCCCC;
+  border-bottom: 2px solid #CCCCCC;
 }
 
 .result-card-preview {
