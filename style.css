@@ -97,14 +97,19 @@ header {
 .status-heading {
   font-size: 1.25rem;
   border-bottom: 2px solid #CCCCCC;
-  margin: 0 .5rem;
+  margin: .5rem .5rem 0 .5rem;
 }
 
-/* LIBRARY */
+/* BOOK DISPLAY */
 .book-card {
   display: flex;
+  flex-direction: column;
   background: #FFFFFF;
   margin: .5rem .5rem 0 .5rem;
+}
+
+.book-card-display-container {
+  display: flex;
 }
 
 .book-card-image {
@@ -124,6 +129,43 @@ header {
 
 .book-card-title {
   font-weight: bold;
+}
+
+/* BOOK OPTIONS */
+.book-option-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #CCCCCC;
+  height: .5rem;
+}
+
+.book-option-toggle:hover {
+  background: #BBBBBB;
+}
+
+.book-option-toggle:active {
+  background: #AAAAAA;
+}
+
+.book-option-toggle .fa-caret-down {
+  font-size: .75rem;
+}
+
+.book-card-option-container {
+  display: none;
+  background: #EEEEEE;
+  border-left: 2px solid #CCCCCC;
+  border-right: 2px solid #CCCCCC;
+}
+
+.book-card-option-container.active {
+  display: flex;
+}
+
+.book-card-read-status-select {
+  width: 100%;
+  background: #EEEEEE;
 }
 
 /* FOOTER */

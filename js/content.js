@@ -15,7 +15,7 @@ searchBar.oninput = () => {
 let createElement = (type, className, parent, innerText) => {
   let element = document.createElement(type)
   if (className) element.classList.add(className)
-  if (innerText) element.innerText = innerText
+  if (innerText) element.innerHTML = innerText
   if (parent) parent.appendChild(element)
   return element
 }
@@ -47,17 +47,36 @@ let displayLibrary = () => {
   clearContainer(upNextContainer)
   clearContainer(previouslyReadContainer)
   library.books.forEach(book => {
+    // FIND PARENT CONTAINER
     let bookContainer = null
     if (book.readStatus == 'currently reading') bookContainer = currentlyReadingContainer
     else if (book.readStatus == 'up next') bookContainer = upNextContainer
     else if (book.readStatus == 'previously read') bookContainer = previouslyReadContainer
 
+    // BOOK INFO DISPLAY
     let bookCard = createElement('div', 'book-card', bookContainer)
-    let bookImage = createElement('img', 'book-card-image', bookCard)
-    let bookTextContainer = createElement('div', 'book-card-text-container', bookCard)
+    let bookDisplay = createElement('div', 'book-card-display-container', bookCard)
+    let bookImage = createElement('img', 'book-card-image', bookDisplay)
+    let bookTextContainer = createElement('div', 'book-card-text-container', bookDisplay)
     bookImage.style.backgroundImage = `url(${book.image})`
     createElement('p', 'book-card-title', bookTextContainer, book.title)
     createElement('p', 'book-card-author', bookTextContainer, book.author)
+
+    // BOOK OPTIONS
+    let optionContainer = createElement('div', 'book-card-option-container', bookCard)
+    let selectReadStatus = createElement('select', 'book-card-read-status-select', optionContainer,
+    `<option value="currently reading">Currently Reading</option>
+    <option value="up next">Up Next</option>
+    <option value="previously read">Previously Read</option>`)
+    selectReadStatus.value = book.readStatus
+    selectReadStatus.onchange = () => {
+      book.setReadStatus(selectReadStatus.value)
+      displayLibrary()
+    }
+    let optionToggle = createElement('div', 'book-option-toggle', bookCard, '<i class="fa-solid fa-caret-down"></i>')
+    optionToggle.onclick = () => {
+      optionContainer.classList.toggle('active')
+    }
   })
 }
 
