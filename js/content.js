@@ -65,7 +65,7 @@ let displayLibrary = () => {
     // BOOK OPTIONS
     let optionContainer = createElement('div', 'book-card-option-container', bookCard)
     let selectReadStatus = createElement('select', 'book-card-read-status-select', optionContainer,
-    `<option value="currently reading">Currently Reading</option>
+      `<option value="currently reading">Currently Reading</option>
     <option value="up next">Up Next</option>
     <option value="previously read">Previously Read</option>`)
     selectReadStatus.value = book.readStatus
@@ -73,6 +73,8 @@ let displayLibrary = () => {
       book.setReadStatus(selectReadStatus.value)
       displayLibrary()
     }
+    let deleteButton = createElement('div', 'book-card-delete-button', optionContainer, '<i class="fa-solid fa-trash-can"></i>')
+    deleteButton.onclick = () => console.log(`deleted ${book.title}`)
     let optionToggle = createElement('div', 'book-option-toggle', bookCard, '<i class="fa-solid fa-caret-down"></i>')
     optionToggle.onclick = () => {
       optionContainer.classList.toggle('active')

@@ -154,6 +154,9 @@ header {
 
 .book-card-option-container {
   display: none;
+  padding: .5rem 0;
+  justify-content: space-between;
+  align-items: center;
   background: #EEEEEE;
   border-left: 2px solid #CCCCCC;
   border-right: 2px solid #CCCCCC;
@@ -164,8 +167,28 @@ header {
 }
 
 .book-card-read-status-select {
-  width: 100%;
-  background: #EEEEEE;
+  background: #CCCCCC;
+  text-align: center;
+  margin-left: 1rem;
+}
+
+.book-card-delete-button {
+  background: #CCCCCC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem;
+  border-radius: 50px;
+  margin-right: 1rem;
+}
+
+.book-card-delete-button .fa-trash-can {
+  background: #CCCCCC;
+}
+
+.book-card-delete-button p {
+  font-size: .75rem;
+  margin: 0 1rem;
 }
 
 /* FOOTER */
