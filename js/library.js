@@ -5,6 +5,10 @@ class Library {
   addBook(book) {
     this.books.push(book)
   }
+  removeBook(book) {
+    let index = this.books.findIndex((obj) => obj.id == book.id)
+    this.books.splice(index)
+  }
 }
 
 class Book {

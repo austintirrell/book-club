@@ -74,10 +74,14 @@ let displayLibrary = () => {
       displayLibrary()
     }
     let deleteButton = createElement('div', 'book-card-delete-button', optionContainer, '<i class="fa-solid fa-trash-can"></i>')
-    deleteButton.onclick = () => console.log(`deleted ${book.title}`)
-    let optionToggle = createElement('div', 'book-option-toggle', bookCard, '<i class="fa-solid fa-caret-down"></i>')
+    deleteButton.onclick = () => {
+      library.removeBook(book)
+      displayLibrary()
+    }
+    let optionToggle = createElement('div', 'book-option-toggle', bookCard, '<i class="fa-solid fa-caret-left"></i>')
     optionToggle.onclick = () => {
       optionContainer.classList.toggle('active')
+      optionToggle.classList.toggle('active')
     }
   })
 }
