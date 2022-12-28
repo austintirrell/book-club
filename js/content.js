@@ -35,6 +35,7 @@ let displayResults = (results) => {
       displayLibrary()
       searchBar.value = ''
       resultsContainer.classList.remove('active')
+      saveData()
     }
   })
 }
@@ -65,6 +66,7 @@ let displayLibrary = () => {
     deleteButton.onclick = () => {
       library.removeBook(book)
       displayLibrary()
+      saveData()
     }
     let selectReadStatus = createElement('select', 'book-card-read-status-select', optionContainer,
       `<option value="currently reading">Currently Reading</option>
@@ -74,6 +76,7 @@ let displayLibrary = () => {
     selectReadStatus.onchange = () => {
       book.setReadStatus(selectReadStatus.value)
       displayLibrary()
+      saveData()
     }
     let optionToggle = createElement('div', 'book-option-toggle', bookCard, '<i class="fa-solid fa-caret-left"></i>')
     optionToggle.onclick = () => {
@@ -96,6 +99,7 @@ let displayLibrary = () => {
     saveNotesButton.onclick = () => {
       book.addNote(new Note(titleInput.value, noteInput.value))
       displayLibrary()
+      saveData()
     }
 
     createButton.onclick = () => createNotesForm.classList.toggle('active')
