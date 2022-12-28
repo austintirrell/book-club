@@ -4,10 +4,12 @@ class Library {
   }
   addBook(book) {
     this.books.push(book)
+    saveData()
   }
   removeBook(book) {
     let index = this.books.findIndex((obj) => obj.id == book.id)
     this.books.splice(index)
+    saveData()
   }
 }
 
@@ -21,11 +23,8 @@ class Book {
   }
   setReadStatus(status) {
     this.readStatus = status
+    saveData()
   }
 }
 
 let library = new Library()
-
-let bookExample = new Book("5wBQEp6ruIAC", "The Pragmatic Programmer", "Andrew Hunt, David Thomas", "currently reading", "http://books.google.com/books/content?id=5wBQEp6ruIAC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api")
-
-library.addBook(bookExample)
