@@ -27,14 +27,11 @@ let clearContainer = (container) => {
 let displayResults = (results) => {
   clearContainer(resultsContainer)
   results.forEach(result => {
-    let book = new Book(result.id, result.volumeInfo.title, result.volumeInfo.authors, 'up next', result.volumeInfo.imageLinks.thumbnail)
-    if (Array.isArray(book.author) && book.author.length > 1) book.author = book.author.join(', ')
-
     let resultCard = createElement('div', 'result-card', resultsContainer)
-    createElement('p', 'result-card-title', resultCard, book.title)
-    createElement('p', 'result-card-author', resultCard, book.author)
+    createElement('p', 'result-card-title', resultCard, result.volumeInfo.title)
+    createElement('p', 'result-card-author', resultCard, result.volumeInfo.authors)
     resultCard.onclick = () => {
-      library.addBook(book)
+      library.addBook(new Book(result.id, result.volumeInfo.title, result.volumeInfo.authors, 'up next', result.volumeInfo.imageLinks.thumbnail))
       displayLibrary()
       searchBar.value = ''
       resultsContainer.classList.remove('active')

@@ -59,6 +59,7 @@ header {
   left: 0;
   right: 0;
   background: #EEEEEE;
+  z-index: 2;
 }
 
 #results-container.active {
@@ -123,7 +124,7 @@ header {
 .book-card-text-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   margin: 0 1rem;
 }
